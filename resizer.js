@@ -1,0 +1,683 @@
+
+const networks = [{
+  name: 'facebook',
+  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad27edeb6ff32aab206_facebook-color-icon.webp'
+}, {
+  name: 'instagram',
+  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad216e3419cb15f39d7_instagram-color-icon.webp'
+}, {
+  name: 'twitter',
+  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad245bc453b24d9b914_twitter-color-icon.webp'
+}, {
+  name: 'linkedin',
+  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad2074182433c410360_linkedin-color-icon.webp'
+}, {
+  name: 'pinterest',
+  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad2cf1b78ebc5a6cc8a_pintrest-color-icon.webp'
+}, {
+  name: 'youtube',
+  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad2f3b2bad085b7392f_youtube-color-icon.webp'
+}, {
+  name: 'shopify',
+  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad276b860e90dda2da7_shopify-color-icon.webp'
+}, {
+  name: 'amazon',
+  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad2e7bf287ad990614c_amazon-color-icon.webp'
+}];
+const facebookSizes = [{
+  name: 'profile image',
+  size: {
+    width: 180,
+    height: 180
+  }
+}, {
+  name: 'cover',
+  size: {
+    width: 820,
+    height: 312,
+  }
+}, {
+  name: 'shared image (timeline)',
+  size: {
+    width: 1200,
+    height: 630,
+  }
+}, {
+  name: 'post image',
+  size: {
+    width: 1200,
+    height: 900,
+  }
+}, {
+  name: 'link image',
+  size: {
+    width: 1200,
+    height: 628,
+  }
+}, {
+  name: 'highlighted image',
+  size: {
+    width: 1200,
+    height: 717,
+  }
+}, {
+  name: 'event image',
+  size: {
+    width: 1920,
+    height: 1080,
+  }
+}, {
+  name: 'group cover photo',
+  size: {
+    width: 1640,
+    height: 856,
+  }
+}, {
+  name: 'facebook stories',
+  size: {
+    width: 1080,
+    height: 1920,
+  }
+}];
+const instagramSizes = [{
+  name: 'profile photo',
+  size: {
+    width: 110,
+    height: 110,
+  }
+}, {
+  name: 'square photo',
+  size: {
+    width: 1080,
+    height: 1080,
+  }
+}, {
+  name: 'landscape photo',
+  size: {
+    width: 1080,
+    height: 608,
+  }
+}, {
+  name: 'vertical photo',
+  size: {
+    width: 1080,
+    height: 1350,
+  }
+}, {
+  name: 'instagram story + IGTV',
+  size: {
+    width: 1080,
+    height: 1980,
+  }
+}];
+const twitterSizes = [{
+  name: 'profile photo',
+  size: {
+    width: 400,
+    height: 400,
+  }
+}, {
+  name: 'header photo',
+  size: {
+    width: 1500,
+    height: 500,
+  }
+}, {
+  name: 'shared link',
+  size: {
+    width: 1200,
+    height: 628,
+  }
+}, {
+  name: 'single image tweet',
+  size: {
+    width: 1200,
+    height: 675,
+  }
+}, {
+  name: 'two image tweet (7:8)',
+  size: {
+    width: 700,
+    height: 800,
+  }
+}, {
+  name: 'three image tweet: left image (7:8)',
+  size: {
+    width: 700,
+    height: 800,
+  }
+}, {
+  name: 'three image tweet: right images (7:4)',
+  size: {
+    width: 1200,
+    height: 686,
+  }
+}, {
+  name: 'four image tweet (2:1)',
+  size: {
+    width: 1200,
+    height: 600,
+  }
+}];
+const linkedinSizes = [{
+  name: 'personal profile photo',
+  size: {
+    width: 400,
+    height: 400,
+  }
+}, {
+  name: 'personal profile banner',
+  size: {
+    width: 1584,
+    height: 396,
+  }
+}, {
+  name: 'company logo',
+  size: {
+    width: 300,
+    height: 300,
+  }
+}, {
+  name: 'company page cover',
+  size: {
+    width: 1536,
+    height: 768,
+  }
+}, {
+  name: 'company main image',
+  size: {
+    width: 1128,
+    height: 376,
+  }
+}, {
+  name: 'company photos',
+  size: {
+    width: 900,
+    height: 600,
+  }
+}, {
+  name: 'shared image',
+  size: {
+    width: 1200,
+    height: 1200,
+  }
+}, {
+  name: 'shared link',
+  size: {
+    width: 1200,
+    height: 627,
+  }
+}];
+const pinterestSizes = [{
+  name: 'profile image',
+  size: {
+    width: 165,
+    height: 165,
+  }
+}, {
+  name: 'square pins',
+  size: {
+    width: 1000,
+    height: 1000,
+  }
+}, {
+  name: 'optimal pins',
+  size: {
+    width: 1000,
+    height: 1500,
+  }
+}, {
+  name: 'long pins',
+  size: {
+    width: 1000,
+    height: 2100,
+  }
+}, {
+  name: 'infographic pins',
+  size: {
+    width: 1000,
+    height: 3000,
+  }
+}, {
+  name: 'board cover',
+  size: {
+    width: 800,
+    height: 800,
+  }
+}];
+const youtubeSizes = [{
+  name: 'channel icon',
+  size: {
+    width: 800,
+    height: 800,
+  },
+}, {
+  name: 'channel art',
+  size: {
+    width: 2560,
+    height: 1440,
+  }
+}, {
+  name: 'video thumbnail',
+  size: {
+    width: 1280,
+    height: 720,
+  }
+}];
+const shopifySizes = [{
+  name: 'logo',
+  size: {
+    width: 200,
+    height: 200,
+  }
+}, {
+  name: 'square',
+  size: {
+    width: 2048,
+    height: 2048,
+  }
+}, {
+  name: 'small slideshow',
+  size: {
+    width: 1200,
+    height: 400,
+  }
+}, {
+  name: 'large slideshow',
+  size: {
+    width: 2000,
+    height: 600,
+  }
+}, {
+  name: 'wide slideshow',
+  size: {
+    width: 2000,
+    height: 400,
+  }
+}, {
+  name: 'long slideshow',
+  size: {
+    width: 1200,
+    height: 600,
+  }
+}, {
+  name: 'collection',
+  size: {
+    width: 1024,
+    height: 1024,
+  }
+}, {
+  name: 'banner',
+  size: {
+    width: 2800,
+    height: 1000,
+  }
+}, {
+  name: 'background',
+  size: {
+    width: 1920,
+    height: 1080,
+  }
+}, {
+  name: 'featured blog',
+  size: {
+    width: 1800,
+    height: 1000,
+  }
+}, {
+  name: 'blog content',
+  size: {
+    width: 1000,
+    height: 350,
+  }
+}];
+const amazonSizes = [{
+  name: 'logo',
+  size: {
+    width: 200,
+    height: 200,
+  }
+}, {
+  name: 'product',
+  size: {
+    width: 2500,
+    height: 500,
+  }
+}];
+const reader = new FileReader();
+const selectedNetworks = [];
+const selectedImageSizes = [];
+const croppedImages = {};
+
+let selectedImageIndex = 0,
+  selectedNetworkIndex = 0,
+  activeStep = 1,
+  lastStep = 0,
+  cropperTitle = null,
+  downloadsList = null,
+  nextCropBtn = null,
+  prevStepBtn = null,
+  nextStepBtn = null,
+  cropperArea = null,
+  canvas = null,
+  cropper = null,
+  dataUri = '';
+
+const startOver = (e) => {
+  e.preventDefault();
+  if (cropper) cropper.destroy();
+
+  canvas.style.display = 'block';
+  toggleNavigation('step');
+
+  activeStep = 1;
+  selectedNetworkIndex = 0;
+  selectedImageIndex = 0;
+  showActiveStep();
+};
+const toId = value => value.replace(/\s+/g, '-').replace(/[\(|\)|\+|:]/g, '').toLowerCase();
+const sizeOf = (bytes) => {
+  if (bytes == 0) { return "0.00 B"; }
+  let convertedSize = Math.floor(Math.log(bytes) / Math.log(1024));
+
+  return (bytes / Math.pow(1024, convertedSize)).toFixed(2) + ' ' + ' KMGTP'.charAt(convertedSize) + 'B';
+}
+const getSocialMediaSizeInfo = sizeData => {
+  if (typeof sizeData == 'undefined') return;
+
+  const [socialMediaName, ...socialMediaImageType] = sizeData.split(':');
+  const socialMediaSizes = eval(`${socialMediaName}Sizes`);
+
+  return socialMediaSizes.filter(imageSize => imageSize.name == socialMediaImageType.join(':')).pop();
+};
+const validateImageIndex = () => {
+  if (selectedImageIndex < 0) selectedImageIndex = 0;
+  if (selectedImageIndex > selectedImageSizes.length) selectedImageIndex = selectedImageSizes.length;
+}
+const isNextStep = element => element.id == 'next-step' || element.parentElement.id == 'next-step';
+const isNextCrop = element => element.id == 'next-crop' || element.parentElement.id == 'next-crop';
+
+const initCropper = () => {
+  if (cropper) cropper.destroy();
+
+  cropper = new Cropper(canvas, {
+    viewMode: 1,
+    autoCrop: false,
+    background: false,
+    preview: '#crop-preview'
+  });
+  canvas.style.display = 'none';
+}
+const toggleCropper = on => {
+  cropperArea.style.display = on ? 'flex' : 'none';
+}
+
+const addImage = image => selectedImageSizes.push(image);
+const removeImage = image => selectedImageSizes.splice(selectedImageSizes.indexOf(image), 1);
+const toggleNavigation = (type) => {
+  document.querySelector('#crop-control').style.display = type == 'crop' ? 'flex' : 'none';
+  document.querySelector('#steps-control').style.display = type == 'step' ? 'flex' : 'none';
+}
+
+const updateCropper = () => {
+  if (selectedImageSizes.length == selectedImageIndex) return;
+  if (!selectedImageSizes.length) {
+    cropper.clear();
+    return;
+  }
+
+  const network = selectedImageSizes[selectedImageIndex].split(':')[0];
+  const wantedSize = getSocialMediaSizeInfo(selectedImageSizes[selectedImageIndex]);
+  const aspectRatio = wantedSize.size.width / wantedSize.size.height
+
+  cropper.crop().setAspectRatio(aspectRatio).setCropBoxData(wantedSize.size);
+
+  updateCropperInfo(network, wantedSize);
+};
+const updateCropperInfo = (networkName, mediaData) => {
+  cropperTitle.innerHTML = `Crop ${networkName} ${mediaData.name}`;
+  cropperTitle.parentNode.querySelector('strong').innerHTML = mediaData.name;
+  cropperTitle.parentNode.querySelector('.soona-resizer_crop-label:last-child').innerHTML = `${mediaData.size.width}px X ${mediaData.size.height}px`;
+}
+const updateCropButtons = () => {
+  toggleNavigation('crop');
+  prevCropBtn.disabled = !selectedImageSizes.length || selectedImageIndex == 0;
+  nextCropBtn.disabled = !selectedImageSizes.length || selectedImageIndex == selectedImageSizes.length;
+
+  if (selectedImageIndex == selectedImageSizes.length - 1) nextCropBtn.textContent = 'download';
+  else nextCropBtn.textContent = 'next';
+
+  if (selectedImageIndex == selectedImageSizes.length) {
+    selectedImageIndex = 0;
+    toggleNavigation('off');
+    nextStepBtn.click();
+  }
+};
+const updateSizeSelectors = () => {
+  document.querySelector('#sizes-title').innerHTML = `choose sizes for ${selectedNetworks[selectedNetworkIndex]}`;
+  document.querySelectorAll(`.shown`).forEach(size => size.classList.remove('shown'));
+  document.querySelectorAll(`.${selectedNetworks[selectedNetworkIndex]}-size`).forEach(size => size.classList.add('shown'));
+}
+const showActiveStep = () => {
+  if (!document.getElementById(`step-${activeStep}`)) return;
+  const nav = document.querySelector('.soona-resizer_form-navigation');
+
+  if (activeStep == 1) document.querySelector('.soona-resizer_platforms').classList.remove('active');
+  else document.querySelector('.soona-resizer_platforms').classList.add('active');
+
+  document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+  document.getElementById(`step-${activeStep}`).classList.add('active');
+
+  $("html, body").animate({ scrollTop: ($('.soona-resizer_platforms').offset().top - 130) }, "fast");
+}
+
+const handleStepChange = event => {
+  event.preventDefault();
+  if (activeStep == 3 && (0 <= selectedNetworkIndex && selectedNetworkIndex < selectedNetworks.length - 1)) {
+    selectedNetworkIndex += isNextStep(event.target) ? 1 : -1;
+  } else {
+    activeStep += (isNextStep(event.target) ? 1 : -1);
+  }
+
+  if (activeStep < 1 || activeStep > lastStep * 1) {
+    activeStep = activeStep < 1 ? 1 : lastStep * 1;
+    return;
+  }
+
+  showActiveStep();
+  toggleCropper(document.querySelector(`#step-${activeStep}`).classList.contains('needs-cropper'));
+
+  switch (activeStep) {
+    case 2:
+      prevStepBtn.innerHTML = 'start over';
+      selectedNetworkIndex = 0;
+      break;
+    case 3:
+      prevStepBtn.innerHTML = 'back';
+
+      if(selectedNetworkIndex == -1) return prevStepBtn.click();
+
+      updateSizeSelectors();
+      break;
+    case 4:
+      if(!selectedNetworks.includes('custom')) {
+        selectedImageIndex = 0;
+        selectedNetworkIndex = selectedNetworks.length - 2;
+        isNextStep(event.target) ? nextStepBtn.click() : setTimeout(() => prevStepBtn.click(), 10);
+      }
+      break;
+    case 5:
+      initCropper();
+      updateCropper();
+      updateCropButtons();
+      break;
+    case 7:
+      appendDownloadedFiles();
+      break;
+  }
+};
+const handleImageChange = event => {
+  event.preventDefault();
+
+  const needsCrop = isNextCrop(event.target);
+
+  selectedImageIndex += (needsCrop ? 1 : -1);
+  if (selectedImageIndex < 0) {
+    toggleNavigation('step');
+    prevStepBtn.click();
+    validateImageIndex();
+    return;
+  }
+  validateImageIndex();
+
+  if (needsCrop) handleCrop(selectedImageIndex - 1);
+
+  if (activeStep == 5) updateCropper();
+  updateCropButtons();
+};
+const handleCrop = imageIndex => {
+  const mediaData = getSocialMediaSizeInfo(selectedImageSizes[imageIndex]);
+
+  croppedImages[toId(selectedImageSizes[imageIndex].replace(':', '-'))] = cropper.getCroppedCanvas({
+    ...mediaData.size,
+    fillColor: 'gray',
+  }).toDataURL('image/jpeg', 1);
+};
+
+const appendDownloadedFiles = () => {
+  const downloadExample = document.getElementById('download-example');
+  downloadExample.remove();
+
+  downloadsList.innerHTML = '';
+
+  Object.entries(croppedImages).forEach(([fileName, fileData]) => {
+    // This will append cropped files into a list with the links for downloading them
+    const linkHolder = downloadExample.cloneNode(true);
+    const fileSize = window.atob(fileData.split(',')[1]).length;
+
+    linkHolder.download = fileName
+    linkHolder.innerHTML = linkHolder.innerHTML.replace('{{fileName}}', `${fileName}.jpg`);
+    linkHolder.innerHTML = linkHolder.innerHTML.replace('{{fileSize}}', `~${sizeOf(fileSize)}`);
+    linkHolder.href = fileData;
+
+    downloadsList.appendChild(linkHolder);
+  });
+};
+
+const submitEmail = (event) => {
+  console.log(event.target);
+  console.log('Backend call to save email and proceed to show the downloads list');
+  nextStepBtn.click();
+};
+
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.querySelector('form');
+  const imgEl = document.createElement('img');
+  const startOverBtns = document.querySelectorAll('.upload-new-image');
+  const customSizeBtn = document.getElementById('custom-button');
+  const fileField = form.querySelector('input[type=file]');
+  const emailBtn = document.getElementById('submit-email');
+  
+  cropperArea = document.getElementById('cropper-area');
+  canvas = document.querySelector('canvas');
+  downloadsList = document.getElementById('downloads-list');
+  cropperTitle = document.getElementById('cropper-title');
+  lastStep = document.querySelectorAll('.step').length;
+  prevCropBtn = document.getElementById('prev-crop');
+  nextCropBtn = document.getElementById('next-crop');
+  prevStepBtn = document.getElementById('prev-step');
+  nextStepBtn = document.getElementById('next-step');
+
+  const ctx = canvas.getContext('2d');
+
+  const networkExample = document.getElementById('network-example');
+  const sizeExample = document.getElementById('size-example');
+  const separator = document.createElement('div');
+  separator.classList.add('separator');
+
+  networkExample.remove();
+  sizeExample.remove();
+
+  fillNetworks();
+  showActiveStep(activeStep);
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+  });
+  fileField.addEventListener('change', function () {
+    if (fileField.value == '') {
+      console.log('no file selected');
+      return;
+    }
+
+    reader.readAsDataURL(fileField.files[0]);
+    nextStepBtn.click();
+  });
+  reader.addEventListener('load', () => {
+    dataUri = reader.result;
+    imgEl.src = dataUri;
+  });
+  imgEl.addEventListener('load', () => {
+    if (cropper) {
+      cropper.destroy();
+    }
+
+    canvas.width = imgEl.naturalWidth;
+    canvas.height = imgEl.naturalHeight;
+    ctx.drawImage(imgEl, 0, 0, canvas.width, canvas.height);
+  });
+  emailBtn.addEventListener('click', submitEmail);
+  startOverBtns.forEach(btn => btn.addEventListener('click', startOver));
+  prevCropBtn.addEventListener('click', handleImageChange);
+  nextCropBtn.addEventListener('click', handleImageChange);
+  prevStepBtn.addEventListener('click', handleStepChange);
+  nextStepBtn.addEventListener('click', handleStepChange);
+
+  function fillNetworks() {
+    const networksContainer = document.getElementById('networks');
+
+    networks.forEach(network => {
+      const newNetwork = networkExample.cloneNode(true);
+      newNetwork.id = `network-item-${network.name}`;
+      newNetwork.setAttribute('for', `network-${network.name}`);
+      newNetwork.innerHTML = newNetwork.innerHTML.replaceAll('{{networkName}}', network.name);
+      newNetwork.querySelector('input').setAttribute('name', newNetwork.querySelector('input').dataset.name);
+      newNetwork.querySelector('input').setAttribute('id', newNetwork.querySelector('input').dataset.id);
+      newNetwork.querySelector('img').src = network.logo;
+
+      networksContainer.appendChild(newNetwork);
+      newNetwork.addEventListener('change', event => {
+        event.target.checked ?
+          selectedNetworks.push(network.name) :
+          selectedNetworks.splice(selectedNetworks.indexOf(network.name), 1);
+      });
+      fillSizes(network.name);
+    });
+  }
+  function fillSizes(network) {
+    const sizes = eval(`${network}Sizes`);
+    if (sizes.length == 0) return;
+
+    const sizesContainer = document.getElementById('size-options');
+
+    sizes.forEach(size => {
+      const newSize = sizeExample.cloneNode(true);
+      newSize.id = `size-item-${network}-${toId(size.name)}`;
+      newSize.classList.add(`${network}-size`);
+      newSize.innerHTML = newSize.innerHTML.replaceAll('{{networkName}}', network);
+      newSize.innerHTML = newSize.innerHTML.replaceAll('{{sizeNameId}}', toId(size.name));
+      newSize.innerHTML = newSize.innerHTML.replaceAll('{{sizeName}}', size.name);
+      newSize.innerHTML = newSize.innerHTML.replaceAll('{{size}}', `${size.size.width}px x ${size.size.height}px`)
+      newSize.querySelector('label').setAttribute('for', `${network}-${toId(size.name)}-size`);
+      newSize.querySelector('input').setAttribute('name', newSize.querySelector('input').dataset.name);
+      newSize.querySelector('input').setAttribute('value', newSize.querySelector('input').dataset.name);
+      newSize.querySelector('input').setAttribute('id', newSize.querySelector('input').dataset.id);
+
+      sizesContainer.appendChild(newSize);
+      newSize.addEventListener('change', event => {
+        if (event.target.checked) addImage(event.target.value);
+        else removeImage(event.target.value);
+      });
+    });
+  }
+});
