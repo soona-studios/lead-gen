@@ -1,0 +1,66 @@
+.step {
+  display: none;
+}
+
+.step.active {
+  display: block;
+}
+
+#size-options .separator {
+  width: 100%;
+}
+
+#size-options>div {
+  display: none;
+}
+
+#size-options>div.shown {
+  display: block;
+}
+
+#tool-canvas {
+  background: white;
+  max-width: 100%;
+  z-index: 1;
+  display: block;
+}
+
+#crop-preview-wrapper {
+  position: relative;
+  max-width: 500px;
+}
+
+#crop-preview {
+  overflow: hidden;
+  margin: auto;
+  width: 150px;
+  height: 150px;
+}
+
+.cropper-container {
+  min-height: 330px;
+  max-width: 100%;
+}
+
+.soona-resizer_crop-tools-wrap .soona-resizer_embed {
+  max-width: 100%;
+  min-height: 300px;
+  padding-bottom: 28px;
+}
+
+.soona-resizer_platforms.active {
+  display: flex;
+}
+
+#crop-control {
+  display: none;
+}
+
+.soona-resizer_next-button.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.soona-resizer_error-message {
+  display: none;
+}

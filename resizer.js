@@ -368,7 +368,7 @@ const startOver = (e) => {
   if (cropper) cropper.destroy();
 
   canvas.style.display = 'block';
-  toggleNavigation('step');
+  toggleNavigation('steps');
 
   activeStep = 1;
   selectedNetworkIndex = 0;
@@ -396,6 +396,7 @@ const validateImageIndex = () => {
 }
 const isNextStep = element => element.id == 'next-step' || element.parentElement.id == 'next-step';
 const isNextCrop = element => element.id == 'next-crop' || element.parentElement.id == 'next-crop';
+const isButtonDisabled = element => element.classList.contains('disabled') || element.parentElement.classList.contains('disabled');
 
 const initCropper = () => {
   if (cropper) cropper.destroy();
@@ -416,7 +417,11 @@ const addImage = image => selectedImageSizes.push(image);
 const removeImage = image => selectedImageSizes.splice(selectedImageSizes.indexOf(image), 1);
 const toggleNavigation = (type) => {
   document.querySelector('#crop-control').style.display = type == 'crop' ? 'flex' : 'none';
-  document.querySelector('#steps-control').style.display = type == 'step' ? 'flex' : 'none';
+  document.querySelector('#steps-control').style.display = type == 'steps' ? 'flex' : 'none';
+  document.querySelectorAll('.soona-resizer_form-navigation').forEach(el => el.classList.remove('active'));
+
+  if(document.querySelector(`#${type}-control`))
+    document.querySelector(`#${type}-control`).classList.add('active');
 }
 
 const updateCropper = () => {
@@ -429,10 +434,39 @@ const updateCropper = () => {
   const network = selectedImageSizes[selectedImageIndex].split(':')[0];
   const wantedSize = getSocialMediaSizeInfo(selectedImageSizes[selectedImageIndex]);
   const aspectRatio = wantedSize.size.width / wantedSize.size.height
+  updateCropperPreview(wantedSize.size);
 
   cropper.crop().setAspectRatio(aspectRatio).setCropBoxData(wantedSize.size);
 
   updateCropperInfo(network, wantedSize);
+};
+const updateNetworkNavButtons = () => {
+  const nextButton = document
+                       .querySelector('.soona-resizer_form-navigation.active')
+                       .querySelector('.soona-resizer_next-button');
+
+  if (selectedNetworks.length) nextButton.classList.remove('disabled');
+  else nextButton.classList.add('disabled')
+};
+const updateImageNavButtons = (currentNetwork) => {
+  const nextButton = document
+                       .querySelector('.soona-resizer_form-navigation.active')
+                       .querySelector('.soona-resizer_next-button');
+
+  let checked = false;  
+  document
+    .querySelectorAll(`.${currentNetwork}-size`)
+    .forEach(el => {
+      if (el.querySelector('input').checked) checked = true;
+    });
+
+
+  if (checked) nextButton.classList.remove('disabled');
+  else nextButton.classList.add('disabled');
+};
+const updateCropperPreview = ({width, height}) => {
+  document.querySelector('#crop-preview').style.height = `${height}px`;
+  document.querySelector('#crop-preview').style.width = `${width}px`;
 };
 const updateCropperInfo = (networkName, mediaData) => {
   cropperTitle.innerHTML = `Crop ${networkName} ${mediaData.name}`;
@@ -457,10 +491,11 @@ const updateSizeSelectors = () => {
   document.querySelector('#sizes-title').innerHTML = `choose sizes for ${selectedNetworks[selectedNetworkIndex]}`;
   document.querySelectorAll(`.shown`).forEach(size => size.classList.remove('shown'));
   document.querySelectorAll(`.${selectedNetworks[selectedNetworkIndex]}-size`).forEach(size => size.classList.add('shown'));
-}
+
+  updateImageNavButtons(selectedNetworks[selectedNetworkIndex]);
+};
 const showActiveStep = () => {
   if (!document.getElementById(`step-${activeStep}`)) return;
-  const nav = document.querySelector('.soona-resizer_form-navigation');
 
   if (activeStep == 1) document.querySelector('.soona-resizer_platforms').classList.remove('active');
   else document.querySelector('.soona-resizer_platforms').classList.add('active');
@@ -469,10 +504,17 @@ const showActiveStep = () => {
   document.getElementById(`step-${activeStep}`).classList.add('active');
 
   $("html, body").animate({ scrollTop: ($('.soona-resizer_platforms').offset().top - 130) }, "fast");
-}
+};
+const prepareStep = () => {
+  const nav = document.querySelector('.soona-resizer_form-navigation.active');
+  if (nav && !document.querySelector('input[type="checkbox"]:checked'))
+    nav.querySelector('.soona-resizer_next-button').classList.add('disabled');
+};
 
 const handleStepChange = event => {
   event.preventDefault();
+  if (isNextStep(event.target) && isButtonDisabled(event.target)) return;
+
   if (activeStep == 3 && (0 <= selectedNetworkIndex && selectedNetworkIndex < selectedNetworks.length - 1)) {
     selectedNetworkIndex += isNextStep(event.target) ? 1 : -1;
   } else {
@@ -486,6 +528,7 @@ const handleStepChange = event => {
 
   showActiveStep();
   toggleCropper(document.querySelector(`#step-${activeStep}`).classList.contains('needs-cropper'));
+  prepareStep();
 
   switch (activeStep) {
     case 2:
@@ -508,14 +551,19 @@ const handleStepChange = event => {
       break;
     case 5:
       initCropper();
-      updateCropper();
-      updateCropButtons();
+      setTimeout(() => {
+        updateCropper();
+        updateCropButtons();
+      }, 10);
       break;
     case 7:
       appendDownloadedFiles();
       break;
   }
 };
+const handleCustomSizeSelect = event => {
+  // selectedNetworks.push('custom');
+}
 const handleImageChange = event => {
   event.preventDefault();
 
@@ -523,7 +571,7 @@ const handleImageChange = event => {
 
   selectedImageIndex += (needsCrop ? 1 : -1);
   if (selectedImageIndex < 0) {
-    toggleNavigation('step');
+    toggleNavigation('steps');
     prevStepBtn.click();
     validateImageIndex();
     return;
@@ -565,9 +613,10 @@ const appendDownloadedFiles = () => {
 };
 
 const submitEmail = (event) => {
-  console.log(event.target);
+  const emailField = document.getElementById('email-2');
+  console.log(emailField);
   console.log('Backend call to save email and proceed to show the downloads list');
-  nextStepBtn.click();
+  // nextStepBtn.click();
 };
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -598,6 +647,7 @@ document.addEventListener('DOMContentLoaded', function () {
   networkExample.remove();
   sizeExample.remove();
 
+  toggleNavigation('steps');
   fillNetworks();
   showActiveStep(activeStep);
 
@@ -650,6 +700,8 @@ document.addEventListener('DOMContentLoaded', function () {
         event.target.checked ?
           selectedNetworks.push(network.name) :
           selectedNetworks.splice(selectedNetworks.indexOf(network.name), 1);
+
+        updateNetworkNavButtons();
       });
       fillSizes(network.name);
     });
@@ -677,6 +729,8 @@ document.addEventListener('DOMContentLoaded', function () {
       newSize.addEventListener('change', event => {
         if (event.target.checked) addImage(event.target.value);
         else removeImage(event.target.value);
+
+        updateImageNavButtons(network);
       });
     });
   }
