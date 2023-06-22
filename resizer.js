@@ -1,27 +1,27 @@
 
 const networks = [{
-  name: 'facebook',
+  name: 'Facebook',
   logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad27edeb6ff32aab206_facebook-color-icon.webp'
 }, {
-  name: 'instagram',
+  name: 'Instagram',
   logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad216e3419cb15f39d7_instagram-color-icon.webp'
 }, {
-  name: 'twitter',
+  name: 'Twitter',
   logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad245bc453b24d9b914_twitter-color-icon.webp'
 }, {
-  name: 'linkedin',
+  name: 'Linkedin',
   logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad2074182433c410360_linkedin-color-icon.webp'
 }, {
-  name: 'pinterest',
+  name: 'Pinterest',
   logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad2cf1b78ebc5a6cc8a_pintrest-color-icon.webp'
 }, {
-  name: 'youtube',
+  name: 'YouTube',
   logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad2f3b2bad085b7392f_youtube-color-icon.webp'
 }, {
-  name: 'shopify',
+  name: 'Shopify',
   logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad276b860e90dda2da7_shopify-color-icon.webp'
 }, {
-  name: 'amazon',
+  name: 'Amazon',
   logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad2e7bf287ad990614c_amazon-color-icon.webp'
 }];
 const facebookSizes = [{
@@ -353,6 +353,7 @@ let selectedImageIndex = 0,
   selectedNetworkIndex = 0,
   activeStep = 1,
   lastStep = 0,
+  fileField = null,
   cropperTitle = null,
   downloadsList = null,
   nextCropBtn = null,
@@ -371,6 +372,14 @@ const startOver = (e) => {
   toggleNavigation('steps');
 
   activeStep = 1;
+  fileField.value = '';
+  document.querySelectorAll('input[type=checkbox]').forEach(field => {
+    field.classList.remove('w--redirected-checked');
+    field.checked = false;
+  });
+
+  selectedNetworks.splice(0, selectedNetworks.length);
+  selectedImageSizes.splice(0, selectedImageSizes.length);
   selectedNetworkIndex = 0;
   selectedImageIndex = 0;
   showActiveStep();
@@ -386,7 +395,7 @@ const getSocialMediaSizeInfo = sizeData => {
   if (typeof sizeData == 'undefined') return;
 
   const [socialMediaName, ...socialMediaImageType] = sizeData.split(':');
-  const socialMediaSizes = eval(`${socialMediaName}Sizes`);
+  const socialMediaSizes = eval(`${socialMediaName.toLowerCase()}Sizes`);
 
   return socialMediaSizes.filter(imageSize => imageSize.name == socialMediaImageType.join(':')).pop();
 };
@@ -397,6 +406,7 @@ const validateImageIndex = () => {
 const isNextStep = element => element.id == 'next-step' || element.parentElement.id == 'next-step';
 const isNextCrop = element => element.id == 'next-crop' || element.parentElement.id == 'next-crop';
 const isButtonDisabled = element => element.classList.contains('disabled') || element.parentElement.classList.contains('disabled');
+const isValidEmail = email => email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
 
 const initCropper = () => {
   if (cropper) cropper.destroy();
@@ -469,7 +479,7 @@ const updateCropperPreview = ({width, height}) => {
   document.querySelector('#crop-preview').style.width = `${width}px`;
 };
 const updateCropperInfo = (networkName, mediaData) => {
-  cropperTitle.innerHTML = `Crop ${networkName} ${mediaData.name}`;
+  cropperTitle.innerHTML = `crop ${networkName} ${mediaData.name}`;
   cropperTitle.parentNode.querySelector('strong').innerHTML = mediaData.name;
   cropperTitle.parentNode.querySelector('.soona-resizer_crop-label:last-child').innerHTML = `${mediaData.size.width}px X ${mediaData.size.height}px`;
 }
@@ -503,7 +513,9 @@ const showActiveStep = () => {
   document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
   document.getElementById(`step-${activeStep}`).classList.add('active');
 
-  $("html, body").animate({ scrollTop: ($('.soona-resizer_platforms').offset().top - 130) }, "fast");
+  let topScroll = $('.soona-resizer_platforms').offset().top;
+
+  if (topScroll) $("html, body").animate({ scrollTop: (topScroll - 130) }, "fast");
 };
 const prepareStep = () => {
   const nav = document.querySelector('.soona-resizer_form-navigation.active');
@@ -513,7 +525,7 @@ const prepareStep = () => {
 
 const handleStepChange = event => {
   event.preventDefault();
-  if (isNextStep(event.target) && isButtonDisabled(event.target)) return;
+  if (activeStep > 1 && isNextStep(event.target) && isButtonDisabled(event.target)) return;
 
   if (activeStep == 3 && (0 <= selectedNetworkIndex && selectedNetworkIndex < selectedNetworks.length - 1)) {
     selectedNetworkIndex += isNextStep(event.target) ? 1 : -1;
@@ -554,7 +566,7 @@ const handleStepChange = event => {
       setTimeout(() => {
         updateCropper();
         updateCropButtons();
-      }, 10);
+      }, 20);
       break;
     case 7:
       appendDownloadedFiles();
@@ -614,9 +626,16 @@ const appendDownloadedFiles = () => {
 
 const submitEmail = (event) => {
   const emailField = document.getElementById('email-2');
-  console.log(emailField);
-  console.log('Backend call to save email and proceed to show the downloads list');
-  // nextStepBtn.click();
+  if (!isValidEmail(emailField.value)) return;
+
+  // const request = new XMLHttpRequest();
+  // request.open('POST', 'https://soona-thiago.sa.ngrok.io/resizer');
+  // request.onload = () => {
+  //   console.log(request);
+  //   nextStepBtn.click();
+  // }
+  // request.send();
+  nextStepBtn.click();
 };
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -624,9 +643,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const imgEl = document.createElement('img');
   const startOverBtns = document.querySelectorAll('.upload-new-image');
   const customSizeBtn = document.getElementById('custom-button');
-  const fileField = form.querySelector('input[type=file]');
   const emailBtn = document.getElementById('submit-email');
   
+  fileField = form.querySelector('input[type=file]');
   cropperArea = document.getElementById('cropper-area');
   canvas = document.querySelector('canvas');
   downloadsList = document.getElementById('downloads-list');
@@ -707,7 +726,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
   function fillSizes(network) {
-    const sizes = eval(`${network}Sizes`);
+    const sizes = eval(`${network.toLowerCase()}Sizes`);
     if (sizes.length == 0) return;
 
     const sizesContainer = document.getElementById('size-options');
