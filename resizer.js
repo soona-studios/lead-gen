@@ -344,7 +344,7 @@ const amazonSizes = [{
     height: 500,
   }
 }];
-const subscribeServiceURL = 'https://soona-thiago.sa.ngrok.io'; // falcon.soona.co
+const subscribeServiceURL = 'https://falcon.soona.co';
 const reader = new FileReader();
 const selectedNetworks = [];
 const selectedImageSizes = [];
