@@ -354,7 +354,9 @@ let selectedImageIndex = 0,
   croppedImages = {},
   activeStep = 1,
   lastStep = 0,
+  zip = null,
   downloadExample = null,
+  customSizeBtn = null,
   emailBtn = null,
   fileField = null,
   cropperTitle = null,
@@ -570,6 +572,7 @@ const handleStepChange = event => {
     case 2:
       prevStepBtn.innerHTML = 'start over';
       selectedNetworkIndex = 0;
+      updateNetworkNavButtons();
       break;
     case 3:
       prevStepBtn.innerHTML = 'back';
@@ -590,7 +593,7 @@ const handleStepChange = event => {
       setTimeout(() => {
         updateCropper();
         updateCropButtons();
-      }, 20);
+      }, 50);
       break;
     case 7:
       appendDownloadedFiles();
@@ -598,7 +601,24 @@ const handleStepChange = event => {
   }
 };
 const handleCustomSizeSelect = event => {
-  // selectedNetworks.push('custom');
+  if(selectedNetworks.indexOf('custom') == -1) {
+    customSizeBtn.classList.add('w--redirected-checked');
+    selectedNetworks.push('custom');
+  } else {
+    customSizeBtn.classList.remove('w--redirected-checked');
+    selectedNetworks.splice(selectedNetworks.indexOf('custom'), 1);
+  }
+
+  updateNetworkNavButtons();
+}
+const handleZipDownload = () => {
+  zip = new JSZip();
+  Object.entries(croppedImages).forEach(([imageName, imageData]) => {
+    const image = imageData.split(',')[1];
+    zip.file(`${imageName}.jpg`, image, { base64: true });
+  });
+  zip.generateAsync({ type: 'blob' })
+    .then(content => saveAs(content, 'images.zip'));
 }
 const handleEmailUpdate = event => {
   if (!isValidEmail(event.target.value)) {
@@ -674,9 +694,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const form = document.querySelector('form');
   const imgEl = document.createElement('img');
   const startOverBtns = document.querySelectorAll('.upload-new-image');
-  const customSizeBtn = document.getElementById('custom-button');
   const emailField = document.getElementById('email-2');
-
+  const zipDownloadBtn = document.getElementById('zip-download');
+  
+  customSizeBtn = document.getElementById('custom-button');
   emailBtn = document.getElementById('submit-email');
   fileField = form.querySelector('input[type=file]');
   cropperArea = document.getElementById('cropper-area');
@@ -732,6 +753,8 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   emailBtn.addEventListener('click', submitEmail);
   emailField.addEventListener('keyup', handleEmailUpdate);
+  customSizeBtn.addEventListener('click', handleCustomSizeSelect);
+  zipDownloadBtn.addEventListener('click', handleZipDownload);
   startOverBtns.forEach(btn => btn.addEventListener('click', startOver));
   prevCropBtn.addEventListener('click', handleImageChange);
   nextCropBtn.addEventListener('click', handleImageChange);

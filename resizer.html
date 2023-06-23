@@ -128,6 +128,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" />
   <script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="resizer.js"></script>
   <style id="kl-custom-fonts">
@@ -1179,17 +1180,17 @@
                     <div id="step-7" class="resizer_file-download step needs-cropper">
                       <h2 class="soona-resizer_label is-download">download your files:</h2>
                       <div class="soona-resizer_download-wrapper">
-                        <div id="downloads-list" class="soona-resizer_single-downloads"><a id="download-example"
-                            href="#" class="soona-resizer_download-item w-inline-block">
-                            <div class="soona-resizer_download-info"><img width="256" loading="lazy"
-                                src="https://assets-global.website-files.com/622327bc87949d02598242bf/6487565ff57b316562bdfa7d_image-square.webp"
-                                alt="photo" class="soona-resizer_download-icon-photo" />
+                        <div id="downloads-list" class="soona-resizer_single-downloads">
+                          <a id="download-example" href="#" class="soona-resizer_download-item w-inline-block">
+                            <div class="soona-resizer_download-info">
+                              <img width="256" loading="lazy" src="https://assets-global.website-files.com/622327bc87949d02598242bf/6487565ff57b316562bdfa7d_image-square.webp" alt="photo" class="soona-resizer_download-icon-photo" />
                               <div class="soona-resizer_download-link">{{fileName}}</div>
                               <div class="soona-resizer_download-file-size">{{fileSize}}</div>
-                            </div><img width="256" loading="lazy"
-                              src="https://assets-global.website-files.com/622327bc87949d02598242bf/6487565facb749f8fc7abb63_download-icon-blue.webp"
-                              alt="download" class="soona-resizer_downloading-icon" />
-                          </a></div><a href="#" class="soona-resizer_download-all w-inline-block">
+                            </div>
+                            <img width="256" loading="lazy" src="https://assets-global.website-files.com/622327bc87949d02598242bf/6487565facb749f8fc7abb63_download-icon-blue.webp" alt="download" class="soona-resizer_downloading-icon" />
+                          </a>
+                        </div>
+                        <a href="#" id="zip-download" class="soona-resizer_download-all w-inline-block">
                           <div class="soona-resizer_download-info"><img width="256" loading="lazy"
                               src="https://assets-global.website-files.com/622327bc87949d02598242bf/6487565f287cdbfed2520779_file-zipper.webp"
                               alt="zip file" class="soona-resizer_download-icon-photo" />

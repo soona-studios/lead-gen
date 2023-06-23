@@ -58,6 +58,13 @@
   display: none;
 }
 
+#custom-button.w--redirected-checked {
+  background-color: transparent;
+  background-image: none;
+  border: 2px solid #f0562e;
+  border-radius: 1rem;
+}
+
 #submit-email.disabled,
 .soona-resizer_next-button.disabled {
   opacity: 0.3;
