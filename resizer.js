@@ -344,7 +344,7 @@ const amazonSizes = [{
     height: 500,
   }
 }];
-const subscribeServiceURL = 'https://falcon.soona.co';
+const subscribeServiceURL = 'https://soona-thiago.sa.ngrok.io';
 const reader = new FileReader();
 const selectedNetworks = [];
 const selectedImageSizes = [];
@@ -426,6 +426,24 @@ const initCropper = () => {
   canvas.style.display = 'none';
 }
 const toggleCropper = on => {
+  switch (activeStep){
+    case 6:
+      cropperArea.querySelector('.soona-resizer_crop-tools-wrap').style.display = 'none';
+      cropperArea.querySelector('.soona-resizer_lottie').style.display = 'block';
+      cropperArea.querySelector('.soona-resizer_marketing-ad').style.display = 'none';
+      break;
+    case 7:
+      cropperArea.querySelector('.soona-resizer_crop-tools-wrap').style.display = 'none';
+      cropperArea.querySelector('.soona-resizer_lottie').style.display = 'none';
+      cropperArea.querySelector('.soona-resizer_marketing-ad').style.display = 'block';
+      break;
+    default:
+      cropperArea.querySelector('.soona-resizer_crop-tools-wrap').style.display = 'block';
+      cropperArea.querySelector('.soona-resizer_lottie').style.display = 'none';
+      cropperArea.querySelector('.soona-resizer_marketing-ad').style.display = 'none';
+      break;
+  }
+
   cropperArea.style.display = on ? 'flex' : 'none';
 }
 
