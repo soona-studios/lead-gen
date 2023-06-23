@@ -34,7 +34,9 @@
   overflow: hidden;
   margin: auto;
   width: 450px;
+  max-width: 450px;
   height: 250px;
+  max-height: 250px;
 }
 
 .cropper-container {
@@ -56,6 +58,7 @@
   display: none;
 }
 
+#submit-email.disabled,
 .soona-resizer_next-button.disabled {
   opacity: 0.3;
   cursor: not-allowed;

@@ -344,6 +344,7 @@ const amazonSizes = [{
     height: 500,
   }
 }];
+const subscribeServiceURL = 'https://soona-thiago.sa.ngrok.io'; // falcon.soona.co
 const reader = new FileReader();
 const selectedNetworks = [];
 const selectedImageSizes = [];
@@ -353,6 +354,8 @@ let selectedImageIndex = 0,
   croppedImages = {},
   activeStep = 1,
   lastStep = 0,
+  downloadExample = null,
+  emailBtn = null,
   fileField = null,
   cropperTitle = null,
   downloadsList = null,
@@ -466,7 +469,7 @@ const updateImageNavButtons = (currentNetwork) => {
                        .querySelector('.soona-resizer_form-navigation.active')
                        .querySelector('.soona-resizer_next-button');
 
-  let checked = false;  
+  let checked = false;
   document
     .querySelectorAll(`.${currentNetwork}-size`)
     .forEach(el => {
@@ -579,6 +582,14 @@ const handleStepChange = event => {
 const handleCustomSizeSelect = event => {
   // selectedNetworks.push('custom');
 }
+const handleEmailUpdate = event => {
+  if (!isValidEmail(event.target.value)) {
+    emailBtn.classList.add('disabled');
+    return;
+  }
+
+  emailBtn.classList.remove('disabled');
+}
 const handleImageChange = event => {
   event.preventDefault();
 
@@ -608,9 +619,6 @@ const handleCrop = imageIndex => {
 };
 
 const appendDownloadedFiles = () => {
-  const downloadExample = document.getElementById('download-example');
-  downloadExample.remove();
-
   downloadsList.innerHTML = '';
 
   Object.entries(croppedImages).forEach(([fileName, fileData]) => {
@@ -627,16 +635,21 @@ const appendDownloadedFiles = () => {
   });
 };
 
-const submitEmail = (event) => {
+const submitEmail = () => {
   const emailField = document.getElementById('email-2');
   if (!isValidEmail(emailField.value)) return;
 
   const request = new XMLHttpRequest();
-  request.open('POST', 'https://soona-thiago.sa.ngrok.io/api/resizer');
+  request.open('POST', `${subscribeServiceURL}/api/eventing/subscribe`);
+  request.setRequestHeader("Accept", "application/json");
+  request.setRequestHeader("Content-Type", "application/json");
+
   request.onload = () => {
     if(request.status == 200) nextStepBtn.click();
   }
-  request.send();
+  request.send(JSON.stringify({
+    email: emailField.value
+  }));
 };
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -644,8 +657,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const imgEl = document.createElement('img');
   const startOverBtns = document.querySelectorAll('.upload-new-image');
   const customSizeBtn = document.getElementById('custom-button');
-  const emailBtn = document.getElementById('submit-email');
-  
+  const emailField = document.getElementById('email-2');
+
+  emailBtn = document.getElementById('submit-email');
   fileField = form.querySelector('input[type=file]');
   cropperArea = document.getElementById('cropper-area');
   canvas = document.querySelector('canvas');
@@ -656,16 +670,18 @@ document.addEventListener('DOMContentLoaded', function () {
   nextCropBtn = document.getElementById('next-crop');
   prevStepBtn = document.getElementById('prev-step');
   nextStepBtn = document.getElementById('next-step');
-
+  
   const ctx = canvas.getContext('2d');
-
+  
   const networkExample = document.getElementById('network-example');
   const sizeExample = document.getElementById('size-example');
+  downloadExample = document.getElementById('download-example');
   const separator = document.createElement('div');
   separator.classList.add('separator');
 
   networkExample.remove();
   sizeExample.remove();
+  downloadExample.remove();
 
   toggleNavigation('steps');
   fillNetworks();
@@ -697,6 +713,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ctx.drawImage(imgEl, 0, 0, canvas.width, canvas.height);
   });
   emailBtn.addEventListener('click', submitEmail);
+  emailField.addEventListener('keyup', handleEmailUpdate);
   startOverBtns.forEach(btn => btn.addEventListener('click', startOver));
   prevCropBtn.addEventListener('click', handleImageChange);
   nextCropBtn.addEventListener('click', handleImageChange);
