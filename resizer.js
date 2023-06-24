@@ -344,7 +344,7 @@ const amazonSizes = [{
     height: 500,
   }
 }];
-const subscribeServiceURL = 'https://soona-thiago.sa.ngrok.io';
+const subscribeServiceURL = 'https://falcon.soona.co';
 const reader = new FileReader();
 const selectedNetworks = [];
 const selectedImageSizes = [];
@@ -415,6 +415,7 @@ const isNextStep = element => element.id == 'next-step' || element.parentElement
 const isNextCrop = element => element.id == 'next-crop' || element.parentElement.id == 'next-crop';
 const isButtonDisabled = element => element.classList.contains('disabled') || element.parentElement.classList.contains('disabled');
 const isValidEmail = email => email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
+const isLastSelectedNetwork = index => selectedNetworks.length - 1 == index;
 
 const initCropper = () => {
   if (cropper) cropper.destroy();
@@ -564,6 +565,11 @@ const handleStepChange = event => {
     return;
   }
 
+  const customSizeIndex = selectedNetworks.indexOf('custom');
+  if (customSizeIndex != -1 && selectedNetworkIndex == customSizeIndex) {
+    selectedNetworkIndex += isNextStep(event.target) ? 1 : -1;
+  }
+
   showActiveStep();
   toggleCropper(document.querySelector(`#step-${activeStep}`).classList.contains('needs-cropper'));
   prepareStep();
@@ -578,15 +584,16 @@ const handleStepChange = event => {
       prevStepBtn.innerHTML = 'back';
 
       if(selectedNetworkIndex == -1) return prevStepBtn.click();
+      if(selectedNetworks.includes('custom') && selectedNetworkIndex == selectedNetworks.length && isLastSelectedNetwork(customSizeIndex)) return nextStepBtn.click();
 
       updateSizeSelectors();
       break;
     case 4:
       if(!selectedNetworks.includes('custom')) {
         selectedImageIndex = 0;
-        selectedNetworkIndex = selectedNetworks.length - 2;
         isNextStep(event.target) ? nextStepBtn.click() : setTimeout(() => prevStepBtn.click(), 10);
       }
+      selectedNetworkIndex = selectedNetworks.length - isLastSelectedNetwork(customSizeIndex) ? 3 : 2;
       break;
     case 5:
       initCropper();
@@ -618,7 +625,7 @@ const handleZipDownload = () => {
     zip.file(`${imageName}.jpg`, image, { base64: true });
   });
   zip.generateAsync({ type: 'blob' })
-    .then(content => saveAs(content, 'images.zip'));
+    .then(content => saveAs(content, 'resized-images.zip'));
 }
 const handleEmailUpdate = event => {
   if (!isValidEmail(event.target.value)) {
@@ -686,7 +693,7 @@ const submitEmail = () => {
     if(request.status == 200) nextStepBtn.click();
   }
   request.send(JSON.stringify({
-    email: emailField.value
+    email: emailField.value,
   }));
 };
 
