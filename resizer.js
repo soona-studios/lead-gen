@@ -26,54 +26,63 @@ const networks = [{
 }];
 const facebookSizes = [{
   name: 'profile image',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6483a070880329669f76c8fa_profile-photo.webp',
   size: {
     width: 180,
     height: 180
   }
 }, {
   name: 'cover',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1f24ff5f86872f55fda_facebook-cover.webp',
   size: {
     width: 820,
     height: 312,
   }
 }, {
   name: 'shared image (timeline)',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1f285cc4e4093e5f17a_facebook-link.webp',
   size: {
     width: 1200,
     height: 630,
   }
 }, {
   name: 'post image',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1f2c0eb718745ca00d7_facebook-highlighted.webp',
   size: {
     width: 1200,
     height: 900,
   }
 }, {
   name: 'link image',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1f285cc4e4093e5f17a_facebook-link.webp',
   size: {
     width: 1200,
     height: 628,
   }
 }, {
   name: 'highlighted image',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1f2c0eb718745ca00d7_facebook-highlighted.webp',
   size: {
     width: 1200,
     height: 717,
   }
 }, {
   name: 'event image',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1f16793543394b446c0_facebook-event.webp',
   size: {
     width: 1920,
     height: 1080,
   }
 }, {
   name: 'group cover photo',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1f16793543394b446c0_facebook-event.webp',
   size: {
     width: 1640,
     height: 856,
   }
 }, {
   name: 'facebook stories',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1f285cc4e4093e5f19c_facebook-stories.webp',
   size: {
     width: 1080,
     height: 1920,
@@ -81,30 +90,35 @@ const facebookSizes = [{
 }];
 const instagramSizes = [{
   name: 'profile photo',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1f9128e3bbd5cb9fb00_instagram-profile.webp',
   size: {
     width: 110,
     height: 110,
   }
 }, {
   name: 'square photo',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1f9affe8639ac4ba53f_instagram-square.webp',
   size: {
     width: 1080,
     height: 1080,
   }
 }, {
   name: 'landscape photo',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1f9a60c0193ecb02818_instagram-landscape.webp',
   size: {
     width: 1080,
     height: 608,
   }
 }, {
   name: 'vertical photo',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1f9d6b2bf502cd34ba0_instagram-verticle.webp',
   size: {
     width: 1080,
     height: 1350,
   }
 }, {
   name: 'instagram story + IGTV',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1f9725d444774eba700_instagram-stories.webp',
   size: {
     width: 1080,
     height: 1980,
@@ -112,48 +126,56 @@ const instagramSizes = [{
 }];
 const twitterSizes = [{
   name: 'profile photo',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1fee23d495cb6720c36_twitter-profile.webp',
   size: {
     width: 400,
     height: 400,
   }
 }, {
   name: 'header photo',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1feaffe8639ac4bab8a_twitter-cover.webp',
   size: {
     width: 1500,
     height: 500,
   }
 }, {
   name: 'shared link',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1fe0bd0f43471a7556f_twitter-shared.webp',
   size: {
     width: 1200,
     height: 628,
   }
 }, {
   name: 'single image tweet',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1fe6793543394b466db_twitter-single-image.webp',
   size: {
     width: 1200,
     height: 675,
   }
 }, {
   name: 'two image tweet (7:8)',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1fedf27815cb61599ed_twitter-2-image.webp',
   size: {
     width: 700,
     height: 800,
   }
 }, {
   name: 'three image tweet: left image (7:8)',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1fec0eb718745ca11ed_twitter-3-image-left.webp',
   size: {
     width: 700,
     height: 800,
   }
 }, {
   name: 'three image tweet: right images (7:4)',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1fe7f8c3251d5575fc2_twitter-3-image-right.webp',
   size: {
     width: 1200,
     height: 686,
   }
 }, {
   name: 'four image tweet (2:1)',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1fe4c2fdf9a4e0c12f1_twitter-4-image.webp',
   size: {
     width: 1200,
     height: 600,
@@ -609,10 +631,12 @@ const handleStepChange = event => {
       if(!selectedNetworks.includes('custom')) {
         selectedImageIndex = 0;
         isNextStep(event.target) ? nextStepBtn.click() : setTimeout(() => prevStepBtn.click(), 10);
+        if(selectedImageSizes.includes('custom')) selectedImageSizes.splice(selectedImageSizes.indexOf('custom'), 1);
       } else {
-        selectedImageSizes.push('custom');
+        if(!selectedImageSizes.includes('custom')) selectedImageSizes.push('custom');
       }
-      selectedNetworkIndex = selectedNetworks.length - isLastSelectedNetwork(customSizeIndex) ? 3 : 2;
+
+      selectedNetworkIndex = selectedNetworks.length - (isLastSelectedNetwork(customSizeIndex) ? 2 : 1);
       break;
     case 5:
       initCropper();
@@ -828,6 +852,7 @@ document.addEventListener('DOMContentLoaded', function () {
       newSize.querySelector('input').setAttribute('name', newSize.querySelector('input').dataset.name);
       newSize.querySelector('input').setAttribute('value', newSize.querySelector('input').dataset.name);
       newSize.querySelector('input').setAttribute('id', newSize.querySelector('input').dataset.id);
+      if(size.thumb) newSize.querySelector('img').setAttribute('src', size.thumb);
 
       sizesContainer.appendChild(newSize);
       newSize.addEventListener('change', event => {
