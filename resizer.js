@@ -373,6 +373,7 @@ const startOver = (e) => {
   e.preventDefault();
   if (cropper) cropper.destroy();
 
+  customSizeBtn.classList.remove('w--redirected-checked');
   canvas.style.display = 'block';
   toggleNavigation('steps');
   croppedImages = {};
@@ -454,7 +455,7 @@ const getCustomSize = () => {
   const height = document.getElementById('height-2');
   const width = document.getElementById('width-2');
 
-  return { size: { height: height.value, width: width.value } };
+  return { name: 'size', size: { height: height.value, width: width.value } };
 };
 
 const addImage = image => selectedImageSizes.push(image);
@@ -484,7 +485,6 @@ const updateCropper = () => {
     
     cropper.crop().setAspectRatio(aspectRatio).setCropBoxData(wantedSize.size);
   } else {
-    wantedSize['name'] = 'size';
     cropper.crop().setAspectRatio(null).setCropBoxData({ height: 200, width: 200 }); // not locked to aspect-ratio
   }
 
