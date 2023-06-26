@@ -401,6 +401,7 @@ const sizeOf = (bytes) => {
 }
 const getSocialMediaSizeInfo = sizeData => {
   if (typeof sizeData == 'undefined') return;
+  if (sizeData == 'custom') return getCustomSize();
 
   const [socialMediaName, ...socialMediaImageType] = sizeData.split(':');
   const socialMediaSizes = eval(`${socialMediaName.toLowerCase()}Sizes`);
@@ -449,6 +450,12 @@ const toggleCropper = on => {
 
   cropperArea.style.display = on ? 'flex' : 'none';
 }
+const getCustomSize = () => {
+  const height = document.getElementById('height-2');
+  const width = document.getElementById('width-2');
+
+  return { size: { height: height.value, width: width.value } };
+};
 
 const addImage = image => selectedImageSizes.push(image);
 const removeImage = image => selectedImageSizes.splice(selectedImageSizes.indexOf(image), 1);
@@ -470,10 +477,16 @@ const updateCropper = () => {
 
   const network = selectedImageSizes[selectedImageIndex].split(':')[0];
   const wantedSize = getSocialMediaSizeInfo(selectedImageSizes[selectedImageIndex]);
-  const aspectRatio = wantedSize.size.width / wantedSize.size.height
   updateCropperPreview(wantedSize.size);
 
-  cropper.crop().setAspectRatio(aspectRatio).setCropBoxData(wantedSize.size);
+  if (wantedSize.size.height && wantedSize.size.width) {
+    const aspectRatio = wantedSize.size.width / wantedSize.size.height
+    
+    cropper.crop().setAspectRatio(aspectRatio).setCropBoxData(wantedSize.size);
+  } else {
+    wantedSize['name'] = 'size';
+    cropper.crop().setAspectRatio(null).setCropBoxData({ height: 200, width: 200 }); // not locked to aspect-ratio
+  }
 
   updateCropperInfo(network, wantedSize);
 };
@@ -502,8 +515,12 @@ const updateImageNavButtons = (currentNetwork) => {
   else nextButton.classList.add('disabled');
 };
 const updateCropperPreview = ({width, height}) => {
-  document.querySelector('#crop-preview').style.height = `${height}px`;
-  document.querySelector('#crop-preview').style.width = `${width}px`;
+  if (!width || !height) {
+    document.querySelector('#crop-preview').style = {width: '400px', height: '300px'};
+    return;
+  }
+
+  document.querySelector('#crop-preview').style = { height: `${height}px`, width: `${width}px` };
 };
 const updateCropperInfo = (networkName, mediaData) => {
   cropperTitle.innerHTML = `crop ${networkName} ${mediaData.name}`;
@@ -592,6 +609,8 @@ const handleStepChange = event => {
       if(!selectedNetworks.includes('custom')) {
         selectedImageIndex = 0;
         isNextStep(event.target) ? nextStepBtn.click() : setTimeout(() => prevStepBtn.click(), 10);
+      } else {
+        selectedImageSizes.push('custom');
       }
       selectedNetworkIndex = selectedNetworks.length - isLastSelectedNetwork(customSizeIndex) ? 3 : 2;
       break;
