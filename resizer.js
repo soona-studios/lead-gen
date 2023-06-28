@@ -1,28 +1,28 @@
 
 const networks = [{
-  name: 'Facebook',
-  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad27edeb6ff32aab206_facebook-color-icon.webp'
-}, {
-  name: 'Instagram',
-  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad216e3419cb15f39d7_instagram-color-icon.webp'
-}, {
-  name: 'Twitter',
-  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad245bc453b24d9b914_twitter-color-icon.webp'
-}, {
-  name: 'Linkedin',
-  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad2074182433c410360_linkedin-color-icon.webp'
-}, {
-  name: 'Pinterest',
-  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad2cf1b78ebc5a6cc8a_pintrest-color-icon.webp'
-}, {
-  name: 'YouTube',
-  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad2f3b2bad085b7392f_youtube-color-icon.webp'
+  name: 'Amazon',
+  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad2e7bf287ad990614c_amazon-color-icon.webp'
 }, {
   name: 'Shopify',
   logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad276b860e90dda2da7_shopify-color-icon.webp'
 }, {
-  name: 'Amazon',
-  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad2e7bf287ad990614c_amazon-color-icon.webp'
+  name: 'Instagram',
+  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad216e3419cb15f39d7_instagram-color-icon.webp'
+}, {
+  name: 'Facebook',
+  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad27edeb6ff32aab206_facebook-color-icon.webp'
+}, {
+  name: 'YouTube',
+  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad2f3b2bad085b7392f_youtube-color-icon.webp'
+}, {
+  name: 'Pinterest',
+  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad2cf1b78ebc5a6cc8a_pintrest-color-icon.webp'
+}, {
+  name: 'Linkedin',
+  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad2074182433c410360_linkedin-color-icon.webp'
+}, {
+  name: 'Twitter',
+  logo: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/64836ad245bc453b24d9b914_twitter-color-icon.webp'
 }];
 const facebookSizes = [{
   name: 'profile image',
@@ -183,48 +183,56 @@ const twitterSizes = [{
 }];
 const linkedinSizes = [{
   name: 'personal profile photo',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649b1a057d77ff3281b20403_linkedin-profile.png',
   size: {
     width: 400,
     height: 400,
   }
 }, {
   name: 'personal profile banner',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649b1a044c3f26ff0f7c78b4_linkedin-profile-banner.webp',
   size: {
     width: 1584,
     height: 396,
   }
 }, {
   name: 'company logo',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649b1a059d6734740b5370b2_linkedin-company-logo.png',
   size: {
     width: 300,
     height: 300,
   }
 }, {
   name: 'company page cover',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649b1a05f3f3dd4e4edb9eaf_linkedin-company-banner.webp',
   size: {
     width: 1536,
     height: 768,
   }
 }, {
   name: 'company main image',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649b1a04325217574196e986_linkedin-company-main-image.webp',
   size: {
     width: 1128,
     height: 376,
   }
 }, {
   name: 'company photos',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649b1a04325217574196e989_linkedin-company-images.webp',
   size: {
     width: 900,
     height: 600,
   }
 }, {
   name: 'shared image',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649b1a0565944c1757f2468c_linkedin-shared-image.webp',
   size: {
     width: 1200,
     height: 1200,
   }
 }, {
   name: 'shared link',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649b1a05a05a0cac918c37b1_linkedin-shared-link.webp',
   size: {
     width: 1200,
     height: 627,
@@ -232,36 +240,42 @@ const linkedinSizes = [{
 }];
 const pinterestSizes = [{
   name: 'profile image',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c68222ace105338b50e7e_pinterest-profile.webp',
   size: {
     width: 165,
     height: 165,
   }
 }, {
   name: 'square pins',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c6822965edf4b48a12e3a_pinterest-square-pin.webp',
   size: {
     width: 1000,
     height: 1000,
   }
 }, {
   name: 'optimal pins',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c68222ace105338b50e50_pinterest-optimal-pin.webp',
   size: {
     width: 1000,
     height: 1500,
   }
 }, {
   name: 'long pins',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c682292c9555396e583de_pinterest-long-pin.webp',
   size: {
     width: 1000,
     height: 2100,
   }
 }, {
   name: 'infographic pins',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c6822965edf4b48a12e26_pinterest-infographic-pin.webp',
   size: {
     width: 1000,
     height: 3000,
   }
 }, {
   name: 'board cover',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c6822e53d101ee21b73ab_pinterest-board-cover.webp',
   size: {
     width: 800,
     height: 800,
@@ -269,18 +283,21 @@ const pinterestSizes = [{
 }];
 const youtubeSizes = [{
   name: 'channel icon',
+  thumb: '',
   size: {
     width: 800,
     height: 800,
   },
 }, {
   name: 'channel art',
+  thumb: '',
   size: {
     width: 2560,
     height: 1440,
   }
 }, {
   name: 'video thumbnail',
+  thumb: '',
   size: {
     width: 1280,
     height: 720,
@@ -288,66 +305,77 @@ const youtubeSizes = [{
 }];
 const shopifySizes = [{
   name: 'logo',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c694bbc91fd908d701eb4_shopify-logo.png',
   size: {
     width: 200,
     height: 200,
   }
 }, {
   name: 'square',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c694b2ace105338b607e5_shopify-square-product-page.png',
   size: {
     width: 2048,
     height: 2048,
   }
 }, {
   name: 'small slideshow',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c694b307c55f8c2730d2f_shopify-small-slideshow.webp',
   size: {
     width: 1200,
     height: 400,
   }
 }, {
   name: 'large slideshow',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c694b925a6e93247dc745_shopify-large-slideshow.webp',
   size: {
     width: 2000,
     height: 600,
   }
 }, {
   name: 'wide slideshow',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c694b65d29c64979dcf19_shopify-wide-slideshow.png',
   size: {
     width: 2000,
     height: 400,
   }
 }, {
   name: 'long slideshow',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c694bad507d5d38966b2a_shopify-long-slideshow.webp',
   size: {
     width: 1200,
     height: 600,
   }
 }, {
   name: 'collection',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c694bf0e9980166f01393_shopify-collection-image.webp',
   size: {
     width: 1024,
     height: 1024,
   }
 }, {
   name: 'banner',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c694be53d101ee21ca546_shopify-banner.webp',
   size: {
     width: 2800,
     height: 1000,
   }
 }, {
   name: 'background',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c694b4cfe15c75a5c4167_shopify-background.webp',
   size: {
     width: 1920,
     height: 1080,
   }
 }, {
   name: 'featured blog',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c694b4cfe15c75a5c418c_shopify-featured-blog.png',
   size: {
     width: 1800,
     height: 1000,
   }
 }, {
   name: 'blog content',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c694bcd465694fd84968d_shopify-blog-content.png',
   size: {
     width: 1000,
     height: 350,
@@ -355,15 +383,108 @@ const shopifySizes = [{
 }];
 const amazonSizes = [{
   name: 'logo',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c660d95f05a2c9988abfb_amazon-logo.webp',
   size: {
-    width: 200,
-    height: 200,
+    width: 400,
+    height: 400,
   }
 }, {
-  name: 'product',
+  name: 'product photo',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c660d81058e497db49398_amazon-product-photo.webp',
   size: {
-    width: 2500,
-    height: 500,
+    width: 2000,
+    height: 2000,
+  }
+}, {
+  name: 'standard logo',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c660dd47800655a32bffa_amazon-standard-logo.webp',
+  size: {
+    width: 600,
+    height: 180,
+  }
+}, {
+  name: 'single image + text',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c660d62b13931ebec8d78_amazon-single-text.webp',
+  size: {
+    width: 300,
+    height: 300,
+  }
+}, {
+  name: 'image + specs',
+  thumb: '',
+  size: {
+    width: 300,
+    height: 300,
+  }
+}, {
+  name: '4 images + text',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c660d7c27d41fdf21d8bc_amazon-4-images-text.webp',
+  size: {
+    width: 220,
+    height: 220,
+  }
+}, {
+  name: '3 images + text',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c660dca8dcee4609f0066_amazon-3-images-text.webp',
+  size: {
+    width: 300,
+    height: 300,
+  }
+}, {
+  name: '4 images + text grid',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c660dd2a1a2eb45ee15ec_amazon-4-images-text-grid.webp',
+  size: {
+    width: 135,
+    height: 135,
+  }
+}, {
+  name: 'header image + text',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c660ce0f240c274253439_amazon-header-text.webp',
+  size: {
+    width: 970,
+    height: 600,
+  }
+}, {
+  name: 'comparison chart',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c660c8776fe733403562a_amazon-comparison.webp',
+  size: {
+    width: 150,
+    height: 300,
+  }
+}, {
+  name: 'single image + sidebar',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c660d46715848c693d725_amazon-single-image-sidebar.webp',
+  size: {
+    width: 300,
+    height: 400,
+  }
+}, {
+  name: 'sidebar image',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c660f87066376060821d4_amazon-sidebar.webp',
+  size: {
+    width: 350,
+    height: 175,
+  }
+}, {
+  name: 'image + overlay',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c660c53ebccbbf7fe0e9a_amazon-image-overaly.webp',
+  size: {
+    width: 970,
+    height: 300,
+  }
+}, {
+  name: 'multiple image module',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c660d6ab492158a3b8187_amazon-multiple-image-module.webp',
+  size: {
+    width: 300,
+    height: 300,
+  }
+}, {
+  name: 'image + highlights',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c660ceb076fc18218698e_amazon-image-highlights.webp',
+  size: {
+    width: 300,
+    height: 300,
   }
 }];
 const subscribeServiceURL = 'https://falcon.soona.co';
@@ -454,6 +575,13 @@ const initCropper = () => {
 }
 const toggleCropper = on => {
   switch (activeStep){
+    case 2:
+    case 3:
+      if(cropper) {
+        cropper.destroy();
+        canvas.style.display = 'block';
+      }
+      break
     case 6:
       cropperArea.querySelector('.soona-resizer_crop-tools-wrap').style.display = 'none';
       cropperArea.querySelector('.soona-resizer_lottie').style.display = 'block';
@@ -547,7 +675,8 @@ const updateCropperPreview = ({width, height}) => {
 const updateCropperInfo = (networkName, mediaData) => {
   cropperTitle.innerHTML = `crop ${networkName} ${mediaData.name}`;
   cropperTitle.parentNode.querySelector('strong').innerHTML = mediaData.name;
-  cropperTitle.parentNode.querySelector('.soona-resizer_crop-label:last-child').innerHTML = `${mediaData.size.width}px X ${mediaData.size.height}px`;
+  if (mediaData.size.width && mediaData.size.height) cropperTitle.parentNode.querySelector('.soona-resizer_crop-label:last-child').innerHTML = `${mediaData.size.width}px X ${mediaData.size.height}px`;
+  else cropperTitle.parentNode.querySelector('.soona-resizer_crop-label:last-child').innerHTML = '';
 }
 const updateCropButtons = () => {
   toggleNavigation('crop');
@@ -780,8 +909,9 @@ document.addEventListener('DOMContentLoaded', function () {
     e.preventDefault();
   });
   fileField.addEventListener('change', function () {
-    if (fileField.value == '') {
-      console.log('no file selected');
+    if (fileField.value == '') { return; }
+    if (!['image/jpg', 'image/jpeg', 'image/png'].includes(fileField.files[0].type)) {
+      alert('Please use a valid image');
       return;
     }
 
