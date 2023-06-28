@@ -283,21 +283,21 @@ const pinterestSizes = [{
 }];
 const youtubeSizes = [{
   name: 'channel icon',
-  thumb: '',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c7015ce2580b82617ebcf_youtube-channel-icon.webp',
   size: {
     width: 800,
     height: 800,
   },
 }, {
   name: 'channel art',
-  thumb: '',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c701452b6c71e3b958530_youtube-channel-art.webp',
   size: {
     width: 2560,
     height: 1440,
   }
 }, {
   name: 'video thumbnail',
-  thumb: '',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c701565d29c6497a81ddf_youtube-video-thumbnail.webp',
   size: {
     width: 1280,
     height: 720,
@@ -411,7 +411,7 @@ const amazonSizes = [{
   }
 }, {
   name: 'image + specs',
-  thumb: '',
+  thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/649c660ceb076fc18218698e_amazon-image-highlights.webp',
   size: {
     width: 300,
     height: 300,
