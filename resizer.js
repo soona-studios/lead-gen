@@ -922,6 +922,8 @@ document.addEventListener('DOMContentLoaded', function () {
   fillNetworks();
   showActiveStep(activeStep);
 
+  emailField.value = '';
+
   form.addEventListener('submit', e => {
     e.preventDefault();
   });
