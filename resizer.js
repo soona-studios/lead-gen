@@ -50,14 +50,14 @@ const facebookSizes = [{
   thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1f2c0eb718745ca00d7_facebook-highlighted.webp',
   size: {
     width: 1200,
-    height: 900,
+    height: 630,
   }
 }, {
   name: 'link image',
   thumb: 'https://uploads-ssl.webflow.com/622327bc87949d02598242bf/6499f1f285cc4e4093e5f17a_facebook-link.webp',
   size: {
     width: 1200,
-    height: 628,
+    height: 630,
   }
 }, {
   name: 'highlighted image',
