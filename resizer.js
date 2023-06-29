@@ -561,7 +561,7 @@ const validateImageIndex = () => {
 const isNextStep = element => element.id == 'next-step' || element.parentElement.id == 'next-step';
 const isNextCrop = element => element.id == 'next-crop' || element.parentElement.id == 'next-crop';
 const isButtonDisabled = element => element.classList.contains('disabled') || element.parentElement.classList.contains('disabled');
-const isValidEmail = email => !!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/).length;
+const isValidEmail = email => !!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
 const isLastSelectedNetwork = index => selectedNetworks.length - 1 == index;
 
 const initCropper = () => {
