@@ -530,6 +530,8 @@ const startOver = (e) => {
     field.previousElementSibling.classList.remove('w--redirected-checked');
   });
 
+  document.getElementById('resizer-ad').style.display = 'none';
+
   selectedNetworks.splice(0, selectedNetworks.length);
   selectedImageSizes.splice(0, selectedImageSizes.length);
   selectedNetworkIndex = 0;
@@ -789,6 +791,7 @@ const handleStepChange = event => {
       }
       break;
     case 7:
+      document.getElementById('resizer-ad').style.display = 'flex';
       appendDownloadedFiles();
       break;
   }
