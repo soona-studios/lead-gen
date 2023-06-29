@@ -34,14 +34,13 @@
 #crop-preview {
   overflow: hidden;
   margin: auto;
-  width: 450px;
-  max-width: 450px;
+  width: 310px;
+  max-width: 310px;
   height: 250px;
   max-height: 250px;
 }
 
 .cropper-container {
-  min-height: 330px;
   max-width: 100%;
 }
 
@@ -72,4 +71,11 @@
 
 .soona-resizer_error-message {
   display: none;
+}
+
+@media (min-width: 1025px) {
+  #crop-preview {
+    width: 450px;
+    max-width: 450px;
+  }
 }
