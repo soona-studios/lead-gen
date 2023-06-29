@@ -791,7 +791,7 @@ const handleStepChange = event => {
       }
       break;
     case 7:
-      document.getElementById('resizer-ad').style.display = 'flex';
+      document.getElementById('resizer-ad').style.display = 'grid';
       appendDownloadedFiles();
       break;
   }
@@ -907,7 +907,7 @@ document.addEventListener('DOMContentLoaded', function () {
   nextStepBtn = document.getElementById('next-step');
   
   const ctx = canvas.getContext('2d');
-  
+
   const networkExample = document.getElementById('network-example');
   const sizeExample = document.getElementById('size-example');
   downloadExample = document.getElementById('download-example');
