@@ -559,16 +559,20 @@ const validateImageIndex = () => {
 const isNextStep = element => element.id == 'next-step' || element.parentElement.id == 'next-step';
 const isNextCrop = element => element.id == 'next-crop' || element.parentElement.id == 'next-crop';
 const isButtonDisabled = element => element.classList.contains('disabled') || element.parentElement.classList.contains('disabled');
-const isValidEmail = email => email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
+const isValidEmail = email => !!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/).length;
 const isLastSelectedNetwork = index => selectedNetworks.length - 1 == index;
 
 const initCropper = () => {
   if (cropper) cropper.destroy();
 
   cropper = new Cropper(canvas, {
-    viewMode: 1,
+    viewMode: 3,
+    minContainerWidth: canvas.offsetWidth,
+    minContainerHeight: canvas.offsetHeight,
+    dragMode: 'none',
     autoCrop: false,
     background: false,
+    zoomable: false,
     preview: '#crop-preview'
   });
   canvas.style.display = 'none';
@@ -581,7 +585,10 @@ const toggleCropper = on => {
         cropper.destroy();
         canvas.style.display = 'block';
       }
-      break
+      cropperArea.querySelector('.soona-resizer_crop-tools-wrap').style.display = 'block';
+      cropperArea.querySelector('.soona-resizer_lottie').style.display = 'none';
+      cropperArea.querySelector('.soona-resizer_marketing-ad').style.display = 'none';
+      break;
     case 6:
       cropperArea.querySelector('.soona-resizer_crop-tools-wrap').style.display = 'none';
       cropperArea.querySelector('.soona-resizer_lottie').style.display = 'block';
@@ -773,6 +780,13 @@ const handleStepChange = event => {
         updateCropper();
         updateCropButtons();
       }, 50);
+      break;
+    case 6:
+      if(document.getElementById('email-2').value && isValidEmail(document.getElementById('email-2').value)) {
+        setTimeout(() => {
+          nextStepBtn.click();
+        }, 5);
+      }
       break;
     case 7:
       appendDownloadedFiles();
