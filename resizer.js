@@ -575,9 +575,12 @@ const initCropper = () => {
     autoCrop: false,
     background: false,
     zoomable: false,
-    preview: '#crop-preview'
+    preview: '#crop-preview',
+    ready: () => {
+      updateCropper();
+      updateCropButtons();
+    }
   });
-  canvas.style.display = 'none';
 }
 const toggleCropper = on => {
   switch (activeStep){
@@ -778,10 +781,6 @@ const handleStepChange = event => {
       break;
     case 5:
       initCropper();
-      setTimeout(() => {
-        updateCropper();
-        updateCropButtons();
-      }, 50);
       break;
     case 6:
       if(document.getElementById('email-2').value && isValidEmail(document.getElementById('email-2').value)) {
