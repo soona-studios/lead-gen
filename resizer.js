@@ -726,7 +726,7 @@ const showActiveStep = () => {
 };
 const prepareStep = () => {
   const nav = document.querySelector('.soona-resizer_form-navigation.active');
-  if (nav && !document.querySelector('input[type="checkbox"]:checked'))
+  if (nav && !document.querySelector('input[type="checkbox"]:checked') && activeStep < 4)
     nav.querySelector('.soona-resizer_next-button').classList.add('disabled');
 };
 
@@ -764,7 +764,10 @@ const handleStepChange = event => {
       prevStepBtn.innerHTML = 'back';
 
       if(selectedNetworkIndex == -1) return prevStepBtn.click();
-      if(selectedNetworks.includes('custom') && selectedNetworkIndex == selectedNetworks.length && isLastSelectedNetwork(customSizeIndex)) return nextStepBtn.click();
+      if(selectedNetworks.includes('custom') && selectedNetworkIndex == selectedNetworks.length && isLastSelectedNetwork(customSizeIndex)) {
+        nextStepBtn.classList.remove('disabled');
+        return nextStepBtn.click();
+      }
 
       updateSizeSelectors();
       break;
@@ -822,6 +825,8 @@ const handleEmailUpdate = event => {
   }
 
   emailBtn.classList.remove('disabled');
+
+  if (event.keyCode == 13) return nextStepBtn.click();
 }
 const handleImageChange = event => {
   event.preventDefault();
