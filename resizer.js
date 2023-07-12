@@ -491,6 +491,7 @@ const subscribeServiceURL = 'https://falcon.soona.co';
 const reader = new FileReader();
 const selectedNetworks = [];
 const selectedImageSizes = [];
+const flowBtnType = (window.screen.width < '720') * 1;
 
 let selectedImageIndex = 0,
   selectedNetworkIndex = 0,
@@ -505,8 +506,8 @@ let selectedImageIndex = 0,
   cropperTitle = null,
   downloadsList = null,
   nextCropBtn = null,
-  prevStepBtn = null,
-  nextStepBtn = null,
+  prevStepBtns = null,
+  nextStepBtns = null,
   cropperArea = null,
   canvas = null,
   cropper = null,
@@ -623,12 +624,16 @@ const getCustomSize = () => {
 const addImage = image => selectedImageSizes.push(image);
 const removeImage = image => selectedImageSizes.splice(selectedImageSizes.indexOf(image), 1);
 const toggleNavigation = (type) => {
-  document.querySelector('#crop-control').style.display = type == 'crop' ? 'flex' : 'none';
-  document.querySelector('#steps-control').style.display = type == 'steps' ? 'flex' : 'none';
+  let selector = `#${type}-control`;
+  if(flowBtnType) selector = `#${type}-control.is-sticky-bar`;
+
   document.querySelectorAll('.soona-resizer_form-navigation').forEach(el => el.classList.remove('active'));
 
-  if(document.querySelector(`#${type}-control`))
-    document.querySelector(`#${type}-control`).classList.add('active');
+  document.querySelectorAll('#crop-control').forEach(el => el.style.display = type == 'crop' ? 'flex' : 'none');
+  document.querySelectorAll('#steps-control').forEach(el => el.style.display = type == 'steps' ? 'flex' : 'none');
+
+  if(document.querySelector(selector))
+    document.querySelector(selector).classList.add('active');
 }
 
 const updateCropper = () => {
@@ -672,7 +677,6 @@ const updateImageNavButtons = (currentNetwork) => {
       if (el.querySelector('input').checked) checked = true;
     });
 
-
   if (checked) nextButton.classList.remove('disabled');
   else nextButton.classList.add('disabled');
 };
@@ -692,16 +696,16 @@ const updateCropperInfo = (networkName, mediaData) => {
 }
 const updateCropButtons = () => {
   toggleNavigation('crop');
-  prevCropBtn.disabled = !selectedImageSizes.length || selectedImageIndex == 0;
-  nextCropBtn.disabled = !selectedImageSizes.length || selectedImageIndex == selectedImageSizes.length;
+  prevCropBtns[flowBtnType].disabled = !selectedImageSizes.length || selectedImageIndex == 0;
+  nextCropBtns[flowBtnType].disabled = !selectedImageSizes.length || selectedImageIndex == selectedImageSizes.length;
 
-  if (selectedImageIndex == selectedImageSizes.length - 1) nextCropBtn.textContent = 'download';
-  else nextCropBtn.textContent = 'next';
+  if (selectedImageIndex == selectedImageSizes.length - 1) nextCropBtns.textContent = 'download';
+  else nextCropBtns.textContent = 'next';
 
   if (selectedImageIndex == selectedImageSizes.length) {
     selectedImageIndex = 0;
     toggleNavigation('off');
-    nextStepBtn.click();
+    nextStepBtns[flowBtnType].click();
   }
 };
 const updateSizeSelectors = () => {
@@ -756,17 +760,17 @@ const handleStepChange = event => {
 
   switch (activeStep) {
     case 2:
-      prevStepBtn.innerHTML = 'start over';
+      prevStepBtns[flowBtnType].innerHTML = 'start over';
       selectedNetworkIndex = 0;
       updateNetworkNavButtons();
       break;
     case 3:
-      prevStepBtn.innerHTML = 'back';
+      prevStepBtns[flowBtnType].innerHTML = 'back';
 
-      if(selectedNetworkIndex == -1) return prevStepBtn.click();
+      if(selectedNetworkIndex == -1) return prevStepBtns[flowBtnType].click();
       if(selectedNetworks.includes('custom') && selectedNetworkIndex == selectedNetworks.length && isLastSelectedNetwork(customSizeIndex)) {
-        nextStepBtn.classList.remove('disabled');
-        return nextStepBtn.click();
+        nextStepBtns[flowBtnType].classList.remove('disabled');
+        return nextStepBtns[flowBtnType].click();
       }
 
       updateSizeSelectors();
@@ -774,7 +778,7 @@ const handleStepChange = event => {
     case 4:
       if(!selectedNetworks.includes('custom')) {
         selectedImageIndex = 0;
-        isNextStep(event.target) ? nextStepBtn.click() : setTimeout(() => prevStepBtn.click(), 10);
+        isNextStep(event.target) ? nextStepBtns[flowBtnType].click() : setTimeout(() => prevStepBtns[flowBtnType].click(), 10);
         if(selectedImageSizes.includes('custom')) selectedImageSizes.splice(selectedImageSizes.indexOf('custom'), 1);
       } else {
         if(!selectedImageSizes.includes('custom')) selectedImageSizes.push('custom');
@@ -788,7 +792,7 @@ const handleStepChange = event => {
     case 6:
       if(document.getElementById('email-2').value && isValidEmail(document.getElementById('email-2').value)) {
         setTimeout(() => {
-          nextStepBtn.click();
+          nextStepBtns[flowBtnType].click();
         }, 5);
       }
       break;
@@ -826,17 +830,18 @@ const handleEmailUpdate = event => {
 
   emailBtn.classList.remove('disabled');
 
-  if (event.keyCode == 13) return nextStepBtn.click();
+  if (event.keyCode == 13) return emailBtn.click();
 }
 const handleImageChange = event => {
   event.preventDefault();
 
+  showActiveStep();
   const needsCrop = isNextCrop(event.target);
 
   selectedImageIndex += (needsCrop ? 1 : -1);
   if (selectedImageIndex < 0) {
     toggleNavigation('steps');
-    prevStepBtn.click();
+    prevStepBtns[flowBtnType].click();
     validateImageIndex();
     return;
   }
@@ -883,7 +888,7 @@ const submitEmail = () => {
   request.setRequestHeader("Content-Type", "application/json");
 
   request.onload = () => {
-    if(request.status == 200) nextStepBtn.click();
+    if(request.status == 200) nextStepBtns[flowBtnType].click();
   }
   request.send(JSON.stringify({
     email: emailField.value,
@@ -905,10 +910,10 @@ document.addEventListener('DOMContentLoaded', function () {
   downloadsList = document.getElementById('downloads-list');
   cropperTitle = document.getElementById('cropper-title');
   lastStep = document.querySelectorAll('.step').length;
-  prevCropBtn = document.getElementById('prev-crop');
-  nextCropBtn = document.getElementById('next-crop');
-  prevStepBtn = document.getElementById('prev-step');
-  nextStepBtn = document.getElementById('next-step');
+  prevCropBtns = document.querySelectorAll('#prev-crop');
+  nextCropBtns = document.querySelectorAll('#next-crop');
+  prevStepBtns = document.querySelectorAll('#prev-step');
+  nextStepBtns = document.querySelectorAll('#next-step');
   
   const ctx = canvas.getContext('2d');
 
@@ -939,7 +944,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     reader.readAsDataURL(fileField.files[0]);
-    nextStepBtn.click();
+    nextStepBtns[flowBtnType].click();
   });
   reader.addEventListener('load', () => {
     dataUri = reader.result;
@@ -959,10 +964,10 @@ document.addEventListener('DOMContentLoaded', function () {
   customSizeBtn.addEventListener('click', handleCustomSizeSelect);
   zipDownloadBtn.addEventListener('click', handleZipDownload);
   startOverBtns.forEach(btn => btn.addEventListener('click', startOver));
-  prevCropBtn.addEventListener('click', handleImageChange);
-  nextCropBtn.addEventListener('click', handleImageChange);
-  prevStepBtn.addEventListener('click', handleStepChange);
-  nextStepBtn.addEventListener('click', handleStepChange);
+  prevCropBtns.forEach(btn => btn.addEventListener('click', handleImageChange));
+  nextCropBtns.forEach(btn => btn.addEventListener('click', handleImageChange));
+  prevStepBtns.forEach(btn => btn.addEventListener('click', handleStepChange));
+  nextStepBtns.forEach(btn => btn.addEventListener('click', handleStepChange));
 
   function fillNetworks() {
     const networksContainer = document.getElementById('networks');

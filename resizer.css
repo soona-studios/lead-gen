@@ -73,9 +73,23 @@
   display: none;
 }
 
+.hide-on-mobile {
+  display: none !important;
+}
+.soona-resizer_sticky-bar {
+  display: block !important;
+}
+
 @media (min-width: 1025px) {
   #crop-preview {
     width: 450px;
     max-width: 450px;
+  }
+
+  .hide-on-mobile {
+    display: block !important;
+  }
+  .soona-resizer_sticky-bar {
+    display: none !important;
   }
 }
