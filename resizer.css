@@ -73,7 +73,7 @@
   display: none;
 }
 
-.hide-on-mobile {
+.soona-resizer_desktop-navigation {
   display: none !important;
 }
 .soona-resizer_sticky-bar {
@@ -86,7 +86,7 @@
     max-width: 450px;
   }
 
-  .hide-on-mobile {
+  .soona-resizer_desktop-navigation {
     display: block !important;
   }
   .soona-resizer_sticky-bar {

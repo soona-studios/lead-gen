@@ -624,8 +624,7 @@ const getCustomSize = () => {
 const addImage = image => selectedImageSizes.push(image);
 const removeImage = image => selectedImageSizes.splice(selectedImageSizes.indexOf(image), 1);
 const toggleNavigation = (type) => {
-  let selector = `#${type}-control`;
-  if(flowBtnType) selector = `#${type}-control.is-sticky-bar`;
+  const selector = `#${type}-control.${flowBtnType ? 'is-sticky-bar' : 'hide-on-mobile'}`;
 
   document.querySelectorAll('.soona-resizer_form-navigation').forEach(el => el.classList.remove('active'));
 
@@ -895,6 +894,18 @@ const submitEmail = () => {
   }));
 };
 
+const wrapDesktopNavigation = () => {
+  const desktopBtns = document.querySelectorAll('.soona-resizer_form-navigation.hide-on-mobile');
+  desktopBtns.forEach(el => el.remove());
+
+  const wrapper = document.createElement('div');
+  wrapper.classList.add('soona-resizer_desktop-navigation');
+
+  desktopBtns.forEach(btn => wrapper.appendChild(btn));
+
+  document.querySelector('.soona-resizer_platforms-item.is-platform-select').appendChild(wrapper);
+};
+
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.querySelector('form');
   const imgEl = document.createElement('img');
@@ -927,6 +938,7 @@ document.addEventListener('DOMContentLoaded', function () {
   sizeExample.remove();
   downloadExample.remove();
 
+  wrapDesktopNavigation();
   toggleNavigation('steps');
   fillNetworks();
   showActiveStep(activeStep);
