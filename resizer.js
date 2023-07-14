@@ -618,7 +618,7 @@ const getCustomSize = () => {
   const height = document.getElementById('height-2');
   const width = document.getElementById('width-2');
 
-  return { name: 'size', size: { height: height.value, width: width.value } };
+  return { name: 'select your size', size: { height: height.value, width: width.value } };
 };
 
 const addImage = image => selectedImageSizes.push(image);
