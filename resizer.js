@@ -884,7 +884,7 @@ const submitEmail = () => {
   const request = new XMLHttpRequest();
   analytics.identify({
     email: emailField.value,
-    Embed_Source: "Quote Builder"
+    Embed_Source: "Image Resizer"
   });
 
   request.open('POST', `${subscribeServiceURL}/api/eventing/subscribe`);
