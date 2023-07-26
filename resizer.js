@@ -882,6 +882,11 @@ const submitEmail = () => {
   if (!isValidEmail(emailField.value)) return;
 
   const request = new XMLHttpRequest();
+  analytics.identify({
+    email: emailField.value,
+    Embed_Source: "Quote Builder"
+  });
+
   request.open('POST', `${subscribeServiceURL}/api/eventing/subscribe`);
   request.setRequestHeader("Accept", "application/json");
   request.setRequestHeader("Content-Type", "application/json");
