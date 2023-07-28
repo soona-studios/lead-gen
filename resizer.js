@@ -896,6 +896,7 @@ const submitEmail = () => {
   }
   request.send(JSON.stringify({
     email: emailField.value,
+    lead_source: 'Image Resizer',
   }));
 };
 
