@@ -892,7 +892,7 @@ const submitEmail = () => {
   request.setRequestHeader("Content-Type", "application/json");
 
   request.onload = () => {
-    if(request.status == 200) nextStepBtns[flowBtnType].click();
+    if([200, 204].includes(request.status)) nextStepBtns[flowBtnType].click();
   }
   request.send(JSON.stringify({
     new_lead: {
