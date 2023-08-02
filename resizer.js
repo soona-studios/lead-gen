@@ -895,8 +895,10 @@ const submitEmail = () => {
     if(request.status == 200) nextStepBtns[flowBtnType].click();
   }
   request.send(JSON.stringify({
-    email: emailField.value,
-    lead_source: 'Image Resizer',
+    new_lead: {
+      email: emailField.value,
+      lead_source: 'Image Resizer',
+    }
   }));
 };
 
