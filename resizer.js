@@ -487,7 +487,7 @@ const amazonSizes = [{
     height: 300,
   }
 }];
-const subscribeServiceURL = 'https://falcon.soona.co';
+const subscribeServiceURL = 'https://book.soona.co';
 const reader = new FileReader();
 const selectedNetworks = [];
 const selectedImageSizes = [];
