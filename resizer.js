@@ -982,6 +982,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
   emailField.value = '';
 
+  ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    dropUploadArea.addEventListener(eventName, preventDefaults, false)
+  });
+
+  ['dragenter', 'dragover'].forEach(eventName => {
+    dropUploadArea.addEventListener(eventName, highlight(dropUploadArea), false)
+  });
+  
+  ['dragleave', 'drop'].forEach(eventName => {
+    dropUploadArea.addEventListener(eventName, unhighlight(dropUploadArea), false)
+  });
+
+  dropUploadArea.addEventListener('drop', handleDrop(fileField), false);
+
   form.addEventListener('submit', e => {
     e.preventDefault();
   });
