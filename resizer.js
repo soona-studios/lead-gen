@@ -914,12 +914,41 @@ const wrapDesktopNavigation = () => {
   document.querySelector('.soona-resizer_platforms-item.is-platform-select').appendChild(wrapper);
 };
 
+const handleDrop = () => {
+  return e => {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+
+    if (files.length > 1) {
+      alert('Please upload only one image');
+      return;
+    }
+
+    if (!['image/jpg', 'image/jpeg', 'image/png'].includes(files[0].type)) {
+      alert('Please use a valid image');
+      return;
+    }
+
+    reader.readAsDataURL(files[0]);
+    nextStepBtns[flowBtnType].click();
+  }
+};
+
+const preventDefaults = e => {
+  e.preventDefault();
+  e.stopPropagation();
+};
+
+const highlight = el => () => el.classList.add('highlight');
+const unhighlight = el => () => el.classList.remove('highlight');
+
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.querySelector('form');
   const imgEl = document.createElement('img');
   const startOverBtns = document.querySelectorAll('.upload-new-image');
   const emailField = document.getElementById('email-2');
   const zipDownloadBtn = document.getElementById('zip-download');
+  const dropUploadArea = document.getElementById('drop-upload-area');
   
   customSizeBtn = document.getElementById('custom-button');
   emailBtn = document.getElementById('submit-email');
@@ -952,6 +981,20 @@ document.addEventListener('DOMContentLoaded', function () {
   showActiveStep(activeStep);
 
   emailField.value = '';
+
+  ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    dropUploadArea.addEventListener(eventName, preventDefaults, false)
+  });
+
+  ['dragenter', 'dragover'].forEach(eventName => {
+    dropUploadArea.addEventListener(eventName, highlight(dropUploadArea), false)
+  });
+  
+  ['dragleave', 'drop'].forEach(eventName => {
+    dropUploadArea.addEventListener(eventName, unhighlight(dropUploadArea), false)
+  });
+
+  dropUploadArea.addEventListener('drop', handleDrop(fileField), false);
 
   form.addEventListener('submit', e => {
     e.preventDefault();

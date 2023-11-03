@@ -2,6 +2,11 @@
   display: none;
 }
 
+.highlight {
+  background-color: #c9d0fc;
+  border-color: #5566ea;
+}
+
 .step.active {
   display: block;
 }
