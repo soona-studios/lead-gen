@@ -914,7 +914,7 @@ const wrapDesktopNavigation = () => {
   document.querySelector('.soona-resizer_platforms-item.is-platform-select').appendChild(wrapper);
 };
 
-const handleDrop = input => {
+const handleDrop = () => {
   return e => {
     const dt = e.dataTransfer;
     const files = dt.files;
