@@ -914,6 +914,34 @@ const wrapDesktopNavigation = () => {
   document.querySelector('.soona-resizer_platforms-item.is-platform-select').appendChild(wrapper);
 };
 
+const handleDrop = input => {
+  return e => {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+
+    if (files.length > 1) {
+      alert('Please upload only one image');
+      return;
+    }
+
+    if (!['image/jpg', 'image/jpeg', 'image/png'].includes(files[0].type)) {
+      alert('Please use a valid image');
+      return;
+    }
+
+    reader.readAsDataURL(files[0]);
+    nextStepBtns[flowBtnType].click();
+  }
+};
+
+const preventDefaults = e => {
+  e.preventDefault();
+  e.stopPropagation();
+};
+
+const highlight = el => () => el.classList.add('highlight');
+const unhighlight = el => () => el.classList.remove('highlight');
+
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.querySelector('form');
   const imgEl = document.createElement('img');
