@@ -948,6 +948,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const startOverBtns = document.querySelectorAll('.upload-new-image');
   const emailField = document.getElementById('email-2');
   const zipDownloadBtn = document.getElementById('zip-download');
+  const dropUploadArea = document.getElementById('drop-upload-area');
   
   customSizeBtn = document.getElementById('custom-button');
   emailBtn = document.getElementById('submit-email');
