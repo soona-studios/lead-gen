@@ -80,7 +80,7 @@
   display: block !important;
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 728px) {
   #crop-preview {
     width: 450px;
     max-width: 450px;
